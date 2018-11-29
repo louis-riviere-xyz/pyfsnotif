@@ -99,7 +99,15 @@ class Watcher:
                     _parent = watch,
                 )
             if mask&IGNORED:
+                # text editors (vim, ...) -> IGNORE ???
                 self.rem(watch)
+                self.add(
+                    path = watch.path,
+                    mask = watch.mask,
+                    callback = watch.callback,
+                    recur = watch.recur,
+                    _parent = watch._parent,
+                )
 
     def add(self, path, mask=ALL, callback=default, recur=False, _parent=None):
         with self.lock:
